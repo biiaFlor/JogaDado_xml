@@ -41,7 +41,12 @@ function ler_dados_user()
 
 		file_put_contents("user.xml", $xml->asXML());
 	}
-	echo "<article><br/><br/><div class=\"center\"><h2> User cadastrado com sucesso.</h2></div></article>";
+
+	echo "<div class=\"row justify-content-center\">";
+		echo "<div class=\"margem\">";
+			echo "<h2> User cadastrado com sucesso.</h2>";
+		echo "</div>";
+	echo "</div>";
 }
 
 function buscar_codigo($entidade){
@@ -128,7 +133,7 @@ function cadastro_user()
 				echo "<div class=\"form-group text-center\">
 						<input type = \"submit\" class=\"btn btn-success col-4\" name = \"submeter\" value = \"Cadastrar\"/>
 						<button type = \"button\" class=\"btn btn-danger col-4\" name = \"cancelar\">
-							<a href = \"index.php\"/> Voltar
+							<a href = \"index.php\"/> Voltar</a>
 						</button>
 				</div>";
 			echo "</div>";
@@ -151,6 +156,9 @@ function login(){
 				</div>
 				<div class=\"form-group text-center\">
 					<button type=\"submit\" class=\"btn btn-success col-4\">Entrar</button>
+					<button type = \"button\" class=\"btn btn-danger col-4\" name = \"cancelar\">
+						<a href = \"index.php\"/> Voltar</a>
+					</button>
 				</div>
 			</form>";
 		echo "</div>";
