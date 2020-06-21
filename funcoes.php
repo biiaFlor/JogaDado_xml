@@ -16,16 +16,13 @@ function ler_dados_user()
 						<nome>$nome</nome>
 						<username>$username</username>
 						<senha>$senha</senha>
-						<jogado>0</jogado>
-						<ganho>0</ganho>
-						<perdido>0</perdido>
-						<trofeu>0</trofeu>
 					</user>
-				</users><br/>";
+				</users>";
 
 		atualizar_codigo("user");
 		file_put_contents("user.xml", $xml);
-	} else {
+	}
+	else {
 		$xml = simplexml_load_file("user.xml");
 
 		$user = $xml->addChild('user');
@@ -33,13 +30,9 @@ function ler_dados_user()
 		$user->addChild('nome', $nome);
 		$user->addChild('username', $username);
 		$user->addChild('senha', $senha);
-		$user->addChild('jogado', 0);
-		$user->addChild('ganho', 0);
-		$user->addChild('perdido', 0);
-		$user->addChild('trofeu', 0);
 		atualizar_codigo("user");
 
-		file_put_contents("user.xml", $xml->asXML());
+		file_put_contents("user.xml", $xml->asXML(), 0);
 	}
 
 	echo "<div class=\"row justify-content-center\">";
@@ -78,28 +71,8 @@ function atualizar_codigo($entidade){
 	file_put_contents("sequencia_codigos.xml", $xml->asXML());
 }
 
-function verificar_user()
-{
-	$encontrou = false;
-	if (!empty($_GET)) {
-		$username = $_GET["user"];
-		if (file_exists("user.xml")) {
-			$xml = simplexml_load_file("user.xml");
-			foreach ($xml->children() as $user) {
-				if ($user->username == $username) {
-					$nome = $user->nome;
-					$username = $user->username;
-					$senha = $user->senha;
-					$encontrou = true;
-				}
-			}
-		}
-	}
-	return $encontrou;
-}
 
-function cadastro_user()
-{
+function cadastro_user(){
 	echo "<h3 class = \"text-center margem\">Cadastre-se:</h3>";
 
 	echo "<div class = \"form-row justify-content-center margem\">";
@@ -168,28 +141,13 @@ function login(){
 function confere_user(){
 	$user = $_POST["user"];
 	$senha = $_POST["senha"];
-
 	$xml = simplexml_load_file("user.xml");
+
 	foreach ($xml->children() as $users) {
 		if ($users->username == $user && $users->senha == $senha) {
-			$encontrou = true;
-		} else {
-			$encontrou = false;
+			return true;
 		}
 	}
 
-	if ($encontrou == true) {
-		header("Location: inicial.php");
-	} else {
-		echo "<div class=\"text-center margem\"><h3> User não encontrado! </h3></div>";
-		echo "<div class=\"row justify-content-center\">";
-			echo "<div class=\"col text-center margem\">";
-				echo "<button type=\"button\" class = \"btn btn-success\"><a href = \"formLogin.php\"> Tente novamente </a></button>";
-			echo "</div>";
-			
-			echo "<div class=\"col text-center margem\">";
-				echo "<button type=\"button\" class = \"btn btn-success\"><a href = \"conteudoCadastro.php\"> Cadastre-se </a></button>";
-			echo "</div>";
-		echo "</div>";
-	}
+	return false;
 }

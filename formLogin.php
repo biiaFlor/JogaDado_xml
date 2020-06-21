@@ -19,7 +19,23 @@
 	if (empty($_POST)) {
 		login();
 	} else {
-		confere_user();
+		$resultado = confere_user();
+
+		if($resultado){
+			header("Location: inicial.php");
+		}
+		else{
+			echo "<div class=\"text-center margem\"><h3> User não encontrado! </h3></div>";
+			echo "<div class=\"row justify-content-center\">";
+				echo "<div class=\"col text-center margem\">";
+					echo "<button type=\"button\" class = \"btn btn-success\"><a href = \"formLogin.php\"> Tente novamente </a></button>";
+				echo "</div>";
+				
+				echo "<div class=\"col text-center margem\">";
+					echo "<button type=\"button\" class = \"btn btn-success\"><a href = \"conteudoCadastro.php\"> Cadastre-se </a></button>";
+				echo "</div>";
+			echo "</div>";
+		}
 	}
 
 	include "rodape.php";
