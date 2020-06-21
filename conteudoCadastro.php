@@ -13,7 +13,9 @@
 	}
 	else{
 		ler_dados_user();
-		echo "<a href = \"index.php\"> Voltar </a>";
+		echo "<div class=\"row justify-content-center\">";
+			echo "<button type = \"button\" class = \"btn btn-success text-center\"><a href = \"formLogin.php\"> Login </a></button>";
+		echo "</div>";
 	}
 	
 	include "rodape.php";

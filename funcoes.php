@@ -41,7 +41,12 @@ function ler_dados_user()
 
 		file_put_contents("user.xml", $xml->asXML());
 	}
-	echo "<article><br/><br/><div class=\"center\"><h2> User cadastrado com sucesso.</h2></div></article>";
+
+	echo "<div class=\"row justify-content-center\">";
+		echo "<div class=\"margem\">";
+			echo "<h2> User cadastrado com sucesso.</h2>";
+		echo "</div>";
+	echo "</div>";
 }
 
 function buscar_codigo($entidade){
